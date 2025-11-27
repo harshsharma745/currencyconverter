@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real-Time Currency Exchange System - Convert currencies with live exchange rates">
+    <meta name="keywords" content="currency, exchange, converter, real-time, rates">
+    <meta name="author" content="B.Tech CSE Team">
+    <title>Real-Time Currency Exchange System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">💱 Currency Exchange</div>
+            <div class="nav-buttons">
+                <button class="nav-btn" id="aboutBtn">About</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN CONTAINER ========== -->
+    <div class="container">
+        <!-- ========== CURRENCY CONVERTER CARD ========== -->
+        <div class="main-card">
+            <h1>💱 Real-Time Currency Exchange</h1>
+            
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span class="status-text">Live Updates Active</span>
+                </div>
+                <div class="last-updated" id="lastUpdated">Initializing...</div>
+            </div>
+
+            <!-- From Currency Selection -->
+            <div class="form-group">
+                <label for="fromCurrency">From Currency</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="MXN">MXN - Mexican Peso</option>
+                    <option value="SGD">SGD - Singapore Dollar</option>
+                    <option value="HKD">HKD - Hong Kong Dollar</option>
+                </select>
+            </div>
+
+            <!-- To Currency Selection -->
+            <div class="form-group">
+                <label for="toCurrency">To Currency</label>
+                <select id="toCurrency">
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="MXN">MXN - Mexican Peso</option>
+                    <option value="SGD">SGD - Singapore Dollar</option>
+                    <option value="HKD">HKD - Hong Kong Dollar</option>
+                </select>
+            </div>
+
+            <!-- Amount Input -->
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01">
+                <div class="error-message" id="amountError"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button class="swap-btn" id="swapBtn">🔄 Swap</button>
+                <button class="clear-btn" id="clearBtn">Clear</button>
+            </div>
+
+            <!-- Auto-Update Controls -->
+            <div class="controls">
+                <button class="toggle-btn active" id="toggleAutoUpdate">Auto-Update: ON</button>
+            </div>
+            <div class="update-interval" id="updateInterval">Updates every 5 seconds</div>
+
+            <!-- Loading Spinner -->
+            <div class="loading-spinner" id="spinner"></div>
+
+            <!-- Result Display -->
+            <div class="result-container" id="resultContainer">
+                <div class="result-label">Converted Amount</div>
+                <div class="result-amount" id="resultAmount">0.00</div>
+                <div class="exchange-rate" id="exchangeRate"></div>
+                <div class="real-time-indicator" id="realtimeStatus">🟢 Real-time</div>
+            </div>
+        </div>
+
+        <!-- ========== CONVERSION HISTORY CARD ========== -->
+        <div class="history-card">
+            <h2>📋 Conversion History</h2>
+            <div id="historyList" class="no-history">No conversions yet</div>
+            <button class="delete-all-btn" id="deleteAllBtn" style="display: none;">Delete All History</button>
+        </div>
+    </div>
+
+    <!-- ========== ABOUT MODAL ========== -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2>About This Project</h2>
+                <button class="close-btn" id="closeAboutBtn">&times;</button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Project Overview Section -->
+                <div class="about-section">
+                    <h3>📌 Project Overview</h3>
+                    <p>
+                        Real-Time Currency Exchange System is a modern web application designed to provide live currency conversion 
+                        with real-time exchange rates. Built using HTML5, CSS3, and Vanilla JavaScript, this project demonstrates 
+                        best practices in web development including API integration, responsive design, and state management.
+                    </p>
+                </div>
+
+                <!-- Project Creators Section -->
+                <div class="about-section">
+                    <h3>👥 Project Creators</h3>
+                    <div class="creators-list">
+                        <div class="creator-card">
+                            <div class="creator-icon">👨‍💻</div>
+                            <div class="creator-name">
+                                <a href="https://www.linkedin.com/in/dhruvraj-shekhawat-25110b317?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">Dhruvraj Shekhawat</a>
+                            </div>
+                        </div>
+                        <div class="creator-card">
+                            <div class="creator-icon">👨‍💻</div>
+                            <div class="creator-name">
+                                <a href="https://www.linkedin.com/in/divyansh-paliwal-aaa312241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">Divyansh Paliwal</a>
+                            </div>
+                        </div>
+                        <div class="creator-card">
+                            <div class="creator-icon">👨‍💻</div>
+                            <div class="creator-name">
+                                <a href="https://www.linkedin.com/in/garvit-sharma-050489374?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">Garvit Sharma</a>
+                            </div>
+                        </div>
+                        <div class="creator-card">
+                            <div class="creator-icon">👨‍💻</div>
+                            <div class="creator-name">
+                                <a href="https://www.linkedin.com/in/harsh-sharma-445b66302?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">Harsh Sharma</a>
+                            </div>
+                        </div>
+                        <div class="creator-card">
+                            <div class="creator-icon">👨‍💻</div>
+                            <div class="creator-name">
+                                <a href="https://www.linkedin.com/in/aditya-gautam-54324a31b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">Aditya Gautam</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Features Section -->
+                <div class="about-section">
+                    <h3>✨ Key Features</h3>
+                    <ul class="features-list">
+                        <li>Real-time exchange rate updates every 5 seconds</li>
+                        <li>Support for 12+ major world currencies</li>
+                        <li>Auto-conversion as you type</li>
+                        <li>Conversion history with localStorage persistence</li>
+                        <li>Responsive design for mobile and desktop</li>
+                        <li>Beautiful UI with smooth animations</li>
+                        <li>Toggle auto-update functionality</li>
+                        <li>Input validation with error messages</li>
+                        <li>Currency swap feature</li>
+                        <li>Delete history functionality</li>
+                    </ul>
+                </div>
+
+                <!-- Technologies Used Section -->
+                <div class="about-section">
+                    <h3>🔧 Technologies Used</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript (ES6+)</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">LocalStorage</span>
+                    </div>
+                </div>
+
+                <!-- API Integration Section -->
+                <div class="about-section">
+                    <h3>📡 API Integration</h3>
+                    <p>
+                        This application uses the <strong>ExchangeRate-API</strong> (exchangerate-api.com) for fetching real-time 
+                        currency exchange rates. The API provides accurate, up-to-date rates for multiple currencies worldwide.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button class="modal-close-btn" id="closeAboutBtn2">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Currency Exchange System. All rights reserved.</p>
+            <p>Developed by the B.Tech AI&DS Team</p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script src="script.js"></script>
+</body>
+</html>
